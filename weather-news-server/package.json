@@ -1,0 +1,32 @@
+{
+  "name": "weather-news-server",
+  "module": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "bun --watch server.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "axios": "^1.12.2",
+    "bcrypt": "^6.0.0",
+    "chalk": "^5.6.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "ioredis": "^5.8.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.1",
+    "morgan": "^1.10.1",
+    "nodemailer": "^7.0.9",
+    "winston": "^3.18.3"
+  }
+}
