@@ -3,7 +3,7 @@
 A web application that provides weather forecasts and news updates.
 
 ## Key Features & Benefits
-
+*   **OTP Based Authentication:** Send otp and verify to access dashboard. (Check spam folder too)
 *   **Real-time Weather Updates:** Get current weather conditions and forecasts for any location.
 *   **News Aggregation:** Stay informed with the latest news headlines from various sources.
 *   **Favorite Cities:** Save your frequently visited locations for quick access.
@@ -119,6 +119,7 @@ weather-news-dashboard/
 
 ## Usage Examples
 
+*   **OTP Based Authentication:** Send otp to your email address and verify to access dashboard. (Please check your spam folder also if not received)
 *   **Searching for a city:** Use the search bar to enter a city name. The application will display current weather information for that location.
 *   **Adding a city to favorites:**  Click the "Add to Favorites" button to save the city for quick access in the future.
 *   **Viewing News:**  Browse the latest news headlines displayed on the dashboard.
