@@ -18,7 +18,12 @@ const sendOtpMail = async (email, name, otp, clientIp) => {
             <!-- Header -->
             <tr style="background-color:#ffffff; border-bottom:1px solid #eee;">
               <td align="left" style="padding:20px;">
-                <img src="https://i.ibb.co/QvjmdD3y/climecast-favicon.png" width="40" height="40" style="vertical-align:middle;border:none;display:inline-block;">
+                <img 
+                  src="https://minxs-music.s3.ap-south-1.amazonaws.com/climecast-favicon.png" 
+                  width="40" 
+                  height="40" 
+                  style="vertical-align:middle;border:none;display:inline-block;"
+                >
                 <span style="font-size:22px; font-weight:bold; color:#f37656; margin-left:10px; vertical-align:middle;">ClimeCast</span>
               </td>
             </tr>
