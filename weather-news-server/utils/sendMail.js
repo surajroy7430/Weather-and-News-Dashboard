@@ -1,15 +1,8 @@
-const nodemailer = require("nodemailer");
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const axios = require("axios");
 
 const sendOtpMail = async (email, name, otp, clientIp) => {
-  const html = `
+  try {
+    const html = `
     <table width="100%" cellpadding="0" cellspacing="0" style="font-family:Arial,Helvetica,sans-serif; background-color:#f7f7f7; padding:20px;">
     <tbody>
       <tr>
@@ -74,16 +67,32 @@ const sendOtpMail = async (email, name, otp, clientIp) => {
   </table>
   `;
 
-  const info = await transporter.sendMail({
-    from: `"ClimeCast" <${process.env.EMAIL_USER}>`,
-    to: email,
-    subject: "Verify Your Email",
-    html,
-    replyTo: "no-reply@climecast.com",
-  });
+    const response = await axios.post(
+      "https://api.brevo.com/v3/smtp/email",
+      {
+        sender: { name: "ClimeCast", email: process.env.BREVO_USER },
+        to: [{ email, name: name || "User" }],
+        replyTo: { email: "no-reply@climecast.com" },
+        subject: "Verify Your Email",
+        htmlContent: html,
+      },
+      {
+        headers: {
+          "api-key": process.env.BREVO_KEY,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-  console.log("Email sent:", info.messageId);
-  return info;
+    console.log("Email sent:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error sending email:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
 };
 
 module.exports = sendOtpMail;

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowLeft } from "lucide-react";
@@ -34,9 +35,9 @@ export default function Auth() {
   const handleSuccess = (result) => {
     navigate("/dashboard", { replace: true });
 
-    alert(
-      `Welcome ${result.user.name || result.user.email}! Login successful.`
-    );
+    toast.success(`Welcome ${result.user.name || result.user.email}!`, {
+      description: "Login successful",
+    });
   };
 
   return (
