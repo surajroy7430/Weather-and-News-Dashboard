@@ -20,7 +20,7 @@ A robust Node.js/Express backend API for the Weather & News Dashboard applicatio
 - **Framework**: Express.js
 - **Database**: MongoDB with Mongoose
 - **Authentication**: JWT (access + refresh tokens)
-- **Caching**: node-cache
+- **Caching**: Redis
 - **Validation**: express-validator
 - **Security**: Helmet, CORS, rate limiting
 - **Logging**: Winston + Morgan
@@ -88,11 +88,6 @@ A robust Node.js/Express backend API for the Weather & News Dashboard applicatio
 - `POST /api/auth/refresh` - Refresh access token
 - `POST /api/auth/logout` - User logout
 
-### User Management
-
-- `GET /api/users/me` - Get current user profile
-- `PUT /api/users/me` - Update user profile
-
 ### Weather
 
 - `GET /api/weather/current` - Get current weather
@@ -124,9 +119,13 @@ A robust Node.js/Express backend API for the Weather & News Dashboard applicatio
   },
   savedLocations: [{
     name: String,
+   country: String,
     lat: Number,
     lon: Number,
-    createdAt: Date
+   temp:  Number,
+   icon:  String,
+   condition:  String,
+    createdAt: Date,
   }],
   refreshTokens: [{ token, createdAt }]
 }
@@ -136,31 +135,8 @@ A robust Node.js/Express backend API for the Weather & News Dashboard applicatio
 
 - **Helmet**: Security headers
 - **CORS**: Cross-origin resource sharing
-- **Rate Limiting**: API request limiting
-- **Input Sanitization**: MongoDB injection prevention
 - **JWT**: Secure token-based authentication
-- **Password Hashing**: bcrypt with salt rounds
 - **HTTP-only Cookies**: Secure refresh token storage
-
-## Caching Strategy
-
-- **Weather Data**: 10 minutes TTL
-- **News Data**: 15 minutes TTL
-- **In-memory Cache**: node-cache for development
-- **Production**: Consider Redis for scaling
-
-## Error Handling
-
-Consistent error response format:
-
-```json
-{
-  "status": "error",
-  "code": "ERROR_CODE",
-  "message": "Human readable message",
-  "details": [] // Optional validation details
-}
-```
 
 ## Logging
 
@@ -174,23 +150,17 @@ Consistent error response format:
 ### Environment Variables for Production
 
 ```env
-LOG_LEVEL=info
-NODE_ENV=production
-MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/dbname
-JWT_ACCESS_SECRET=very-long-random-string
-JWT_REFRESH_SECRET=another-very-long-random-string
-OPENWEATHER_API_KEY=your-production-key
-NEWSAPI_KEY=your-production-key
-EMAIL_USER=your-email
-EMAIL_PASS=your-email-password
-FRONTEND_ORIGIN=https://your-frontend-domain.com
+FRONTEND_ORIGIN=your_frontend_origin
+MONGO_URI=your_mongodb_uri
+JWT_ACCESS_SECRET=jwt_access_secret
+JWT_REFRESH_SECRET=jwt_refresh_secret
+EMAIL_USER=nodemail_email
+EMAIL_PASS=nodemail_password
+OPENWEATHER_API_KEY=your_api_key
+NEWSAPI_KEY=your_api_key
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
 ```
-
-## Rate Limits
-
-- **General API**: 100 requests/15 minutes per IP
-- **Authentication**: 1 requests/5 minutes per IP
-- **Weather/News**: Cached responses reduce API calls
 
 ## Contributing
 
