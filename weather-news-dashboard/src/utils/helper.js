@@ -5,9 +5,12 @@ export const getWeatherIconUrl = (iconCode) => {
 export const getWindDirection = (deg) => {
   if (deg == null || isNaN(deg)) return null;
 
-  const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+  const directions = [
+    "N","NNE","NE","ENE","E","ESE","SE","SSE",
+    "S","SSW","SW","WSW","W","WNW","NW","NNW"
+  ];
 
-  const index = Math.round(deg / 45) % 8;
+  const index = Math.round(deg / 22.5) % 16;
   return directions[index];
 };
 
@@ -30,7 +33,7 @@ export const getAqiLevel = (aqi) => {
     case 3:
       return {
         label: "Moderate",
-        color: "text-orange-600 bg-orange-600",
+        color: "text-orange-100 bg-orange-600",
         description:
           "Members of sensitive groups may experience health effects.",
       };
