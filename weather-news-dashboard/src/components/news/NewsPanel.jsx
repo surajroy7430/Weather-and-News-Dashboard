@@ -229,7 +229,7 @@ const NewsPanel = ({ newsData, city, timeout }) => {
                   <div className="space-y-3">
                     <h3 className="font-semibold text-primary/80">Summary</h3>
                     <p className="leading-relaxed text-justify text-muted-foreground/80">
-                      {selectedArticle.content}
+                      {selectedArticle.content.split(" [+")[0]}
                     </p>
                   </div>
                 )}
