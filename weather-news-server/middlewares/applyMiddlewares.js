@@ -3,7 +3,6 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const compression = require("compression");
 const cookieParser = require("cookie-parser");
-// const mongoSanitize = require("express-mongo-sanitize");
 const logger = require("../utils/logger");
 const {
   colorizeMethod,
@@ -47,14 +46,6 @@ const applyMiddlewares = (app) => {
   );
   app.use(helmet());
   app.use(compression());
-  // app.use(
-  //   mongoSanitize({
-  //     replaceWith: "_",
-  //     onSanitize: ({ req, key }) => {
-  //       console.warn(`Sanitized key: ${key}`);
-  //     },
-  //   })
-  // );
 };
 
 module.exports = applyMiddlewares;

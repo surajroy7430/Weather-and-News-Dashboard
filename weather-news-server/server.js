@@ -15,12 +15,16 @@ applyMiddlewares(app);
 
 let isDBConnected = false;
 
-// Health check route
 app.get("/", (req, res) => {
   res.send({
     message: `Server is running...`,
     db: isDBConnected ? "Connected to MongoDB" : "Failed to connect to MongoDB",
   });
+});
+
+// Health check route
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
 });
 
 // API routes
@@ -29,7 +33,6 @@ app.use("/api/users", userRouter);
 app.use("/api/news", newsRouter);
 app.use("/api/weather", weatherRouter);
 app.use("/api/locations", locationRouter);
-
 
 // Unknown Routes (404)
 app.use((req, res, next) => {

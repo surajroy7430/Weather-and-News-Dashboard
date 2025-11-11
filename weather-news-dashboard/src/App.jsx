@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +10,11 @@ import AppRoutes from "./routes/AppRoutes";
 const queryClient = new QueryClient();
 
 function App() {
+  // To warm-up server
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/health`).catch(() => {});
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
